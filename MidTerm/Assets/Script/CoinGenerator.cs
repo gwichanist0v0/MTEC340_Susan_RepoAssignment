@@ -17,9 +17,13 @@ public class CoinGenerator : MonoBehaviour
     private void Start()
     {
         bounds = tilemap.cellBounds;
-        StartCoroutine(GenerateCoins());
-        //Debug.Log("bounds: " + "minx:"+bounds.min.x + "maxx:"+bounds.max.x +"miny"+ bounds.min.y +"maxy"+bounds.max.y);
-        Debug.Log("bounds: " + bounds.size);
+
+        if (GameBehaviors.Instance.State == GameState.Play)
+        {
+            StartCoroutine(GenerateCoins());
+        }
+
+        //Debug.Log("bounds: " + bounds.size);
     }
 
     private void Update()
@@ -40,7 +44,6 @@ public class CoinGenerator : MonoBehaviour
                 {
                     int RandX = Random.Range(bounds.min.x, bounds.max.x +1);
                     int RandY = Random.Range(bounds.min.y, bounds.max.y +1 );
-
                     Vector3Int randGrid = monkTest.TileGridSync(new Vector3Int(RandX, RandY, 0));
                     int val = grid.GetValue(randGrid.x, randGrid.y);
 

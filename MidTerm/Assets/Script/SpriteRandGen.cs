@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+//using UnityEngine.AI;
+//using Unity.AI.Navigation;
+using NavMeshPlus;
+using static UnityEngine.GraphicsBuffer;
+using NavMeshPlus.Components; 
 
 public class SpriteRandGen : MonoBehaviour
 {
@@ -9,17 +14,18 @@ public class SpriteRandGen : MonoBehaviour
     [SerializeField] Sprite sprite;
     [SerializeField] int MaxValue;
     [SerializeField] Grid grid;
-    [SerializeField] GameObject SpritePrefab;
-
     [SerializeField] int whileLoopMax;
-
+    public NavMeshSurface Surface2D; 
 
     private BoundsInt bounds;
     [SerializeField] MonkTest monk;
+    //private GameObject NavMeshObj; 
 
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
+        
+
         bounds = tilemap.cellBounds;
 
         for (int i = 0; i < MaxValue; i++)
@@ -29,8 +35,9 @@ public class SpriteRandGen : MonoBehaviour
 
         whileLoopMax = 10;
 
-        Debug.Log(bounds); 
+        Debug.Log(bounds);
 
+        Surface2D.BuildNavMeshAsync();
     }
 
     void DrawRandomTiles()
@@ -83,37 +90,6 @@ public class SpriteRandGen : MonoBehaviour
             whileCount++;
         }
 
-        //for (int i = 0; i < MaxValue; i++)
-        //{ 
-   
-
-        //    if (val == 0)
-        //    {
-
-        //        Vector3Int randomCell = new Vector3Int(RandX, RandY, bounds.min.z);
-
-
-        //        // Generate a random position within the bounds of the Tilemap
-        //        // Create a new Tile with the desired sprite
-        //        Tile tile = ScriptableObject.CreateInstance<Tile>();
-        //        tile.sprite = sprite;
-
-        //        // Place the tile at the chosen cell
-        //        tilemap.SetTile(randomCell, tile);
-        //        monk.ReceiveRND(randomCell);
-
-        //        // Draw additional tiles adjacent to the chosen cell
-        //        int adjacentCount = Random.Range(2, 6); // Randomly choose 4 or 5 adjacent tiles
-        //        for (int j = 0; j < adjacentCount; j++)
-        //        {
-        //            Vector3Int adjacentCell = randomCell + GetRandomAdjacentOffset();
-        //            tilemap.SetTile(adjacentCell, tile);
-        //            monk.ReceiveADJ(adjacentCell);
-
-
-        //        }
-        //    }
-        //}
 
     }
 

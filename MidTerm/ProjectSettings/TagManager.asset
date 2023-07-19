@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Coin
+  - Enemy
+  - SpeedUp
+  - AttackUp
   layers:
   - Default
   - TransparentFX

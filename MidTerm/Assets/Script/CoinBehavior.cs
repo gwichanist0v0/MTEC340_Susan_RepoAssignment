@@ -34,38 +34,34 @@ public class CoinBehavior : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
 
-        {
+ 
             // Check if the colliding object is a coin
-            if (collider.CompareTag("Player"))
-            {
+        if (collider.CompareTag("Player"))
+        {
             
-                Vector3 coinPosition = transform.position;
-
-                //int coinPosX = Mathf.FloorToInt(coinPosition.x);
-                //int coinPosY = Mathf.FloorToInt(coinPosition.y);
-
-                //Vector3Int coinPositionInt = new Vector3Int(coinPosX, coinPosY, 0);
+            Vector3 coinPosition = transform.position;
 
 
-
-                //grid.SetValue(coinPosX),(coinPosY), 0);
-
-                Vector3Int coinPositionInt = new Vector3Int(
-                    ((int)coinPosition.x > 0 ? (int)coinPosition.x : (int)coinPosition.x - 1), ((int)coinPosition.y > 0 ? (int)coinPosition.y : (int)coinPosition.y - 1), 0);
+            Vector3Int coinPositionInt = new Vector3Int(
+                ((int)coinPosition.x > 0 ? (int)coinPosition.x : (int)coinPosition.x - 1), ((int)coinPosition.y > 0 ? (int)coinPosition.y : (int)coinPosition.y - 1), 0);
                 //Vector3Int coinPositionInt = new Vector3Int((int)coinPosition.x, (int)coinPosition.y, 0);
-                Debug.Log(coinPositionInt);
+            //Debug.Log(coinPositionInt);
+
+
+            monkTest.DestroyCoin(coinPositionInt); 
+            Destroy(gameObject);
+
+            UpdateScore();
 
 
 
-
-                monkTest.DestroyCoin(coinPositionInt); 
-                Destroy(gameObject);
-
-
-
-
-            }
         }
+        
+    }
+
+    private void UpdateScore()
+    {
+        GameBehaviors.Instance.Score += 1;
     }
 
 

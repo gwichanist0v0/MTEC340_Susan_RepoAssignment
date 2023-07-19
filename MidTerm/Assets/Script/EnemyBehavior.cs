@@ -6,41 +6,39 @@ using CodeMonkey.Utils;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    [SerializeField] Transform target;
-    //Hardcode in
 
-    NavMeshAgent agent; 
-    
 
+    NavMeshAgent agent;
+    private GameObject myPlayer; 
+   
     // Start is called before the first frame update
     void Start()
     {
-        var agent = GetComponent<NavMeshAgent>();
+        myPlayer = GameObject.Find("Player");
+        if (myPlayer != null)
+        {
+            Debug.Log("Found the player!");
+        }
+
+        agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
-        agent.updateUpAxis = false; 
+        agent.updateUpAxis = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        SetTargetPosition(); 
+        
+        SetTargetPosition();
+        
+
     }
 
     void SetTargetPosition()
     {
-        Vector3 target = GameObject.Find("Player").transform.position;
-        agent.SetDestination(new Vector3(target.x, target.y, transform.position.z));
-
+        Vector3 position = myPlayer.transform.position;
+        agent.SetDestination(position); 
     }
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            Debug.Log("I KILLED HIM"); 
-
-        }
-
-    }
 }

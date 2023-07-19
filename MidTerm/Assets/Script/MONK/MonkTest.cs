@@ -53,21 +53,40 @@ public class MonkTest : MonoBehaviour
 
     public void DestroyCoin(Vector3Int position)
     {
-        grid.SetValue(TileGridSync(position).x, TileGridSync(position).y, 88);
+        grid.SetValue(TileGridSync(position).x, TileGridSync(position).y, 11);
+
+    }
+
+    public void ReceiveSpeed(Vector3Int position)
+    {
+        grid.SetValue(TileGridSync(position).x, TileGridSync(position).y, 2);
+
+    }
+
+    public void DestroySpeed(Vector3Int position)
+    {
+        grid.SetValue(TileGridSync(position).x, TileGridSync(position).y, 22);
+
+    }
+
+ 
+
+    public void DestroyAttack(Vector3Int position)
+    {
+        grid.SetValue(TileGridSync(position).x, TileGridSync(position).y, 33);
 
     }
 
 
-
     public Vector3Int TileGridSync (Vector3Int tilemapPos)
     {
-
-
         //int gridPosX = tilemapPos.x + 11;
         //int gridPosY = tilemapPos.y + 6;
 
         int gridPosX = tilemapPos.x + Mathf.Abs(tilemap.cellBounds.min.x ) ;
-        int gridPosY = tilemapPos.y + Mathf.Abs(tilemap.cellBounds.min.y + 1) ;
+        int gridPosY = tilemapPos.y+ Mathf.Abs(tilemap.cellBounds.min.y + 1) ;
+
+        
 
         return new Vector3Int(gridPosX, gridPosY, 0);
 
